@@ -14,7 +14,7 @@ import colorama
 from colorama import Back as bg, Fore, Style, init
 init(autoreset=True)
 
-print(f"\n{bg.BLACK}{Fore.GREEN}LP-LoginParser{Style.RESET_ALL}\n\n")
+print(f"\n{bg.BLACK}{Fore.GREEN}LAS-LoginAuthSessionizer{Style.RESET_ALL}\n\n")
 
 def extract_login_payload(session, a):
     def vprint(msg):
