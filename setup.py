@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="lp-loginparser",
-    version="1.0.0",
-    description="Login Form Extractor and Parser with Basic Auth Automation",
+    name="las-loginauthsessionizer",
+    version="1.0.1",
+    description="Login, Authenticate and save the session for future use.",
     author="[Ph4nt01]",
     author_email="ph4nt0.84@gmail.com",
     url="https://github.com/Ph4nt01/LP-LoginParser",
@@ -15,7 +15,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "lp=lp.cli:cli_main"
+            "las=las.cli:cli_main"
         ],
     },
     python_requires=">=3.7",
