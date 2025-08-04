@@ -15,7 +15,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "lp-loginparser=lp_loginparser.cli:cli_main"
+            "lp=lp.cli:cli_main"
         ],
     },
     python_requires=">=3.7",
