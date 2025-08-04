@@ -1,35 +1,33 @@
-# 🔐 LP-LoginParser
+# LAS - LoginAuthSessionizer
 
-**LP-LoginParser** is a powerful command-line tool that extracts and submits login forms from web pages. It uses intelligent detection and fallback logic to identify login forms, even when they're non-standard or split across different HTML containers.
+**LAS (LoginAuthSessionizer)** is a command-line tool that intelligently detects login forms, submits credentials, and saves session cookies and headers for later use in a .json file.
 
-Designed for pentesters, bug bounty hunters, and automation workflows — LP-LoginParser detects fields, submits credentials, and saves session cookies and headers for later authenticated use.
+💡 Supports non-standard login layouts, custom headers, cookies, and verbose HTML inspection.
+
+#### - This tool was mainly made for Using with [FF-FlagFinder](https://github.com/Ph4nt01/FF-FlagFinder) -
+
 
 ---
 
-## 🚀 Features
-
-- ✅ Detects standard and non-standard login forms
-- ✅ Parses form action and all input fields (username, password, CSRF, hidden)
-- ✅ Supports custom headers and cookies
-- ✅ Prints structured payload and status info
-- ✅ Saves authenticated session to `session.json`
-- ✅ Clean output with colorized status messages
-- ✅ Installable via `pip` or `pipx`
+## 🚀 Workflow
+- Detects login form fields
+- Authenticate with user credentials
+- Save the Session in session.json for using it with [FF-FlagFinder](https://github.com/Ph4nt01/FF-FlagFinder) or tools like `requests`, `httpx`, `curl`.
 
 ---
 
 ## 📦 Installation
 
-### Using pipx (Recommended for CLI tools)
+### Using `pipx` (recommended)
 
 ```bash
-pipx install lp-loginparser
+pipx install las-loginauthsessionizer
 ````
 
-### Using pip
+### Using `pip`
 
 ```bash
-pip install lp-loginparser
+pip install las-loginauthsessionizer
 ```
 
 ---
@@ -37,22 +35,23 @@ pip install lp-loginparser
 ## ⚙️ Usage
 
 ```bash
-lp-loginparser -u https://example.com/login
+las -u https://target.com/login
 ```
 
-### With Verbose Output
+### With verbose output:
 
 ```bash
-lp-loginparser -u https://example.com/login -v
+las -u https://target.com/login -v
 ```
 
-### Custom Headers and Cookies
+### With custom headers and cookies:
 
 ```bash
-lp-loginparser \
-  -u https://example.com/login \
-  -hd "X-Forwarded-For: 127.0.0.1" \
-  -ck sessionid=abc123
+las \
+  -u https://target.com/login \
+  -un root -pw toor \
+  -hd "User-Agent: Custom" \
+  -ck sessionid=123456
 ```
 
 ---
@@ -60,16 +59,18 @@ lp-loginparser \
 ## 🧪 Output Example
 
 ```
-LP-LoginParser
+LAS-LoginAuthSessionizer
 
-[*] Container #1: <form action='/login' method='POST'>
-<input type='text' name='username' value=''>
-<input type='password' name='password' value=''>
-<input type='submit' name='submit' value='Login'>
+[*] [verbose] Dumping form‐like containers:
 
-[+] Detected login form action URL: [https://example.com/login]
+[*] Container #2: <form action='doLogin' method='POST'>
+<input type='text' name='uid' value=''>
+<input type='password' name='passw' value=''>
+<input type='submit' name='btnSubmit' value='Login'>
 
-[+] Detected login fields: {'username': 'admin', 'password': 'admin', 'csrf_token': 'abc123'}
+[+] Detected login form action URL: [https://target.com/doLogin]
+
+[+] Detected login fields: {'uid': 'admin', 'passw': 'admin'}
 
 [+] Detected login form structure: <form>
 
@@ -81,50 +82,54 @@ Session saved to: [session.json]
 
 ---
 
-## 🧰 CLI Options
+## 📥 Output: Session File
 
-| Option                 | Description                                                      |
-| ---------------------- | ---------------------------------------------------------------- |
-| `-u`, `--url`          | URL of the login page (required)                                 |
-| `-un`, `--username`    | Username to submit (default: `admin`)                            |
-| `-pw`, `--password`    | Password to submit (default: `admin`)                            |
-| `-v`, `--verbose`      | Enable verbose mode for HTML inspection                          |
-| `-ck`, `--cookie`      | Cookies in `key=value` format                                    |
-| `-hd`, `--header`      | Custom headers in `Key: Value` format                            |
-| `-s`, `--session-file` | Output JSON file to store session info (default: `session.json`) |
+A JSON file (default: `session.json`) will be saved, containing:
+
+```json
+{
+  "cookies": {
+    "sessionid": "abc123"
+  },
+  "headers": {
+    "User-Agent": "Mozilla/5.0 ..."
+  }
+}
+```
+
+---
+
+## 🔧 CLI Options
+
+| Option                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| `-u`, `--url`          | Target login page URL (required)                  |
+| `-un`, `--username`    | Username to use in login (default: `admin`)       |
+| `-pw`, `--password`    | Password to use in login (default: `admin`)       |
+| `-v`, `--verbose`      | Enable verbose output                             |
+| `-ck`, `--cookie`      | Add cookies in `key=value` format                 |
+| `-hd`, `--header`      | Add headers in `Key: Value` format                |
+| `-s`, `--session-file` | Output file for session (default: `session.json`) |
 
 ---
 
 ## 📂 Project Structure
 
 ```
-lp-loginparser/
-├── lp_loginparser/
+las-loginauthsessionizer/
+├── las/
 │   ├── __init__.py
 │   └── cli.py
-├── setup.py
-├── pyproject.toml
 ├── README.md
 ├── LICENSE
+├── setup.py
+├── pyproject.toml
 ├── requirements.txt
 └── .gitignore
 ```
 
 ---
 
-## 📄 License
+## 📜 Author
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🙏 Author
-
-Made with passion for security automation by [Your Name](https://github.com/yourusername)
-
-```
-
----
-
-Let me know if you want a badge section (PyPI version, license, downloads), or if you'd like me to auto-generate the PyPI description from this ✅
-```
+[Ph4nt01](https://github.com/Ph4nt01)
