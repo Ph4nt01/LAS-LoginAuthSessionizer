@@ -113,23 +113,6 @@ A JSON file (default: `session.json`) will be saved, containing:
 
 ---
 
-## 📂 Project Structure
-
-```
-las-loginauthsessionizer/
-├── las/
-│   ├── __init__.py
-│   └── cli.py
-├── README.md
-├── LICENSE
-├── setup.py
-├── pyproject.toml
-├── requirements.txt
-└── .gitignore
-```
-
----
-
 ## 📜 Author
 
 [Ph4nt01](https://github.com/Ph4nt01)
