@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="las-loginauthsessionizer",
-    version="1.0.0",
+    version="1.0.1",
     description="Login, Authenticate and save the session for future use.",
     author="[Ph4nt01]",
     author_email="ph4nt0.84@gmail.com",
